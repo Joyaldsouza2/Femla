@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer to 6:30 AM</title>
+    
+    <!-- Import Montserrat font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-image: url('WhatsApp Image 2024-10-10 at 22.04.07_f21c1e4a.jpg');
+            background-size: contain; /* Scale image to fit within screen */
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 100vh; /* Ensure the body takes up full viewport height */
+            margin: 0;
+            color: white;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif; /* Main font */
+        }
+
+        #names {
+            font-size: 3em;
+            font-weight: 700;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #subheading {
+            font-size: 1.5em;
+            font-weight: 400;
+            margin-top: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        #timer {
+            font-size: 3em;
+            font-weight: 700;
+            margin-top: 40px;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Timer Flip Animation (Flap) */
+        .digit {
+            display: inline-block;
+            background-color: #000;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #00ff00; /* Neon green for a digital effect */
+        }
+
+        h1, #timer, #names, #subheading {
+            background-color: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Heading for Names -->
+    <div id="names">Femla and Joyal Dsouza</div>
+
+    <!-- Sub-heading -->
+    <div id="subheading">Until we meet</div>
+
+    <!-- Timer -->
+    <div id="timer">
+        <span class="digit" id="hours">00</span>h
+        <span class="digit" id="minutes">00</span>m
+        <span class="digit" id="seconds">00</span>s
+    </div>
+
+    <script>
+        function updateTimer() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(6, 30, 0, 0);  // Set time to 6:30 AM
+
+            const timeDifference = tomorrow - now;
+
+            if (timeDifference > 0) {
+                const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                // Update each digit for the flap-style effect
+                document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+                document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+                document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById("timer").textContent = "It's 6:30 AM!";
+                clearInterval(interval);
+            }
+        }
+
+        const interval = setInterval(updateTimer, 1000);
+    </script>
+
+</body>
+</html>
